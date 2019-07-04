@@ -1,0 +1,38 @@
+#!/bin/bash
+
+
+echo "***************************************************************"
+echo Running update
+echo "***************************************************************"
+sudo apt -y update
+sleep 2
+
+echo "***************************************************************"
+echo Upgradable Packages
+echo "***************************************************************"
+sudo apt list --upgradable
+
+read -p "Continue Update? [Yy]" yn
+case $yn in
+    [Nn]* ) exit;;
+esac
+
+echo
+echo "***************************************************************"
+echo Running upgrade
+echo "***************************************************************"
+sudo apt -y upgrade
+sleep 2
+
+echo
+echo "***************************************************************"
+echo Running dist-upgrade
+echo "***************************************************************"
+sudo apt -y dist-upgrade
+
+echo "***************************************************************"
+echo Removing packages that are no longer required
+echo "***************************************************************"
+#sudo apt autoremove
+sudo apt -y autoremove
+
