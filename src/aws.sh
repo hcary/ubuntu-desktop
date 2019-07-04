@@ -1,12 +1,19 @@
 #!/bin/bash
 
-sudo apt install -y zsh zsh-theme-powerlevel9k zsh-syntax-highlighting python3-pip curl
-sudo apt install python3-pip curl
-sudo pip3 install --upgrade pip
+ts=`date +"%Y%m%d%H%M"`
 
-#sudo -H pip3 install awscli --upgrade --user
+#echo $ts | sudo tee -a /ect/awscli.txt
+#sudo sh -c 'echo "${ts}" >>/ect/awscli.txt'
 
 
-curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli.zip"
-unzip awscli.zip
-sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+
+if [ ! -f /etc/awscli.txt ];
+then
+    curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli.zip"
+    unzip awscli.zip
+    sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+    rm awscli.zip
+    sudo sh -c "echo ${ts} >> /etc/awscli.txt"
+fi
+
+sudo pip install boto3
