@@ -1,5 +1,10 @@
 #!/bin/bash
 
+echo "***************************************************************"
+echo Removing packages that are no longer required
+echo "***************************************************************"
+#sudo apt autoremove
+sudo apt -y autoremove
 
 echo "***************************************************************"
 echo Running update
@@ -44,9 +49,5 @@ echo Running dist-upgrade
 echo "***************************************************************"
 sudo apt -y dist-upgrade
 
-echo "***************************************************************"
-echo Removing packages that are no longer required
-echo "***************************************************************"
-#sudo apt autoremove
-sudo apt -y autoremove
+
 
